@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5</title>
+    <link rel="stylesheet" href="formVal.css">
+</head>
+
+<body>
+
+    
+    <form action="./viewUsers.html" class="container" onsubmit="adduser();">
+        <input type="text" placeholder="First Name" class="formInputs" id="username" pattern="[a-zA-Z]+" required>
+        <input type="text" placeholder="last Name" class="formInputs" id="lname" pattern="[a-zA-Z]+" required>
+        <input type="text" placeholder="email" class="formInputs" id="email" pattern="[a-zA-Z0-9]+@" required>
+        <input type="text" placeholder="age" class="formInputs" id="age" pattern="[0-9]+">
+        
+        <input type="submit" value="Add user" id="submitBtn">
+    </form>
+
+    <script>
+        var submitBtn = document.getElementById("submitBtn");
+
+        function adduser() {
+            var fname = document.getElementById("username")
+            var lname = document.getElementById("lname")
+            var email = document.getElementById("email")
+            var age = document.getElementById("age")
+
+
+            var usersArray = []
+            var users = {
+                fname: fname.value,
+                lname: lname.value,
+                email: email.value,
+                age: age.value,
+
+            }
+            if (localStorage.getItem("users") != null) {
+                usersArray = JSON.parse(localStorage.getItem("users"));
+
+            }
+            usersArray.push(users);
+            localStorage.setItem("users", JSON.stringify(usersArray));
+        
+        }
+
+
+    </script>
+
+</body>
+
+</html>

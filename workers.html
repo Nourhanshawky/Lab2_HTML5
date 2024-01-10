@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>workers</title>
+</head>
+<body style="text-align: center;">
+   <h2>Calculate sum (as heavy operation)</h2>
+   <input type="text">
+   <button id="sum" onclick="">sum</button>
+
+   <h2>Chanage background</h2>
+   <button id="bg" onclick="">Chanage bg</button>
+
+   <script>
+    let worker = new Worker("../JavaScript/workers.js")
+    let worker2 = new Worker("../JavaScript/worker2.js");
+        let sum = document.getElementById("sum");
+        let bg = document.getElementById("bg");
+
+        sum.onclick = function () {
+            worker.postMessage("");
+        }
+        worker.onmessage = function (message) {
+            console.log(message);
+            alert(message.data);
+        }
+
+        bg.onclick = function () {
+            worker2.postMessage("");
+        }
+        worker2.onmessage =function(event){
+            document.body.style.background = event.data;
+        }
+
+   </script>
+    
+
+
+</body>
+</html>
